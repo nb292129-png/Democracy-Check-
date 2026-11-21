@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>แบบประเมินความเป็นประชาธิปไตยของขบวนการเคลื่อนไหวทางการเมือง (60 ข้อ)</title>
+  <title>P.I.C.T. — แบบประเมินความเป็นประชาธิปไตยของขบวนการเคลื่อนไหวทางการเมือง (60 ข้อ)</title>
   <style>
     :root {
       --bg: #f4f6f9;
@@ -30,6 +30,38 @@
       max-width: 1120px;
       margin: 0 auto;
       padding: 16px 14px;
+    }
+
+    .brand-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 16px;
+      margin-bottom: 12px;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #1e3a8a;
+      line-height: 1.2;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
     }
 
     header.hero {
@@ -182,7 +214,6 @@
       align-items: center;
       gap: 8px;
       transition: all 0.2s ease;
-      break-after: avoid;
     }
 
     .cat-header h2 { margin: 0; font-size: clamp(0.98rem, 1.8vw, 1.12rem); color: #1f2937; }
@@ -202,7 +233,6 @@
       border-radius: 10px;
       padding: 13px 15px;
       margin-bottom: 9px;
-      break-inside: avoid;
     }
 
     .q-body {
@@ -281,6 +311,47 @@
       margin: 8px 0 0;
     }
 
+    .print-report {
+      display: none;
+    }
+
+    .report-box {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+
+    .report-box h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #1e3a8a;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 4px;
+    }
+
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      margin-top: 8px;
+    }
+
+    .report-table th,
+    .report-table td {
+      border: 1px solid #d1d5db;
+      padding: 7px 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .report-table th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+    }
+
     @media print {
       @page {
         size: A4 portrait;
@@ -300,6 +371,12 @@
         padding: 0;
       }
 
+      .brand-bar {
+        border: 1px solid #cbd5e1;
+        margin-bottom: 10px;
+        padding: 8px 12px;
+      }
+
       header.hero {
         background: #1e3a8a !important;
         color: #fff !important;
@@ -307,55 +384,35 @@
         margin-bottom: 10px;
       }
 
-      .top-bar {
-        position: static;
-        box-shadow: none;
-        border-radius: 10px;
-        margin-bottom: 12px;
-      }
-
-      .bar-btns,
-      .opt-btn:not(.on) {
+      .top-bar,
+      #app,
+      .bar-btns {
         display: none !important;
       }
 
-      .drawer {
+      .print-report {
         display: block !important;
       }
 
-      .q-card {
-        padding: 9px 12px;
-        margin-bottom: 6px;
-        box-shadow: none;
-      }
-
-      .q-body {
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 12px !important;
-      }
-
-      .q-info { flex: 1 1 62% !important; }
-      .q-controls { flex: 0 0 230px !important; }
-
-      .opt-btn.on {
-        min-height: 28px;
-        padding: 4px 8px;
-        font-size: 0.8rem;
-      }
-
-      .note {
-        background: #fff;
-        border: 1px solid #d1d5db;
+      .report-box {
+        break-inside: avoid;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="brand-bar">
+      <img src="logo.png" alt="P.I.C.T. Logo" class="brand-logo" />
+      <div>
+        <div class="brand-title">P.I.C.T.</div>
+        <div class="brand-sub">Political Movement Democracy Assessment Framework</div>
+      </div>
+    </div>
+
     <header class="hero">
       <h1>แบบประเมินความเป็นประชาธิปไตยของขบวนการเคลื่อนไหวทางการเมือง</h1>
-      <p>60 ตัวชี้วัด (5 หมวด) • สีเปลี่ยนอัตโนมัติตามผลประเมิน • รองรับการปริ้นและบันทึกเป็น PDF</p>
+      <p>60 ตัวชี้วัด (5 หมวด) • สีเปลี่ยนอัตโนมัติตามผลประเมิน • รองรับการปริ้นแบบสรุปวิเคราะห์ (PDF)</p>
     </header>
 
     <section class="card">
@@ -395,9 +452,9 @@
         <div class="bar-btns">
           <button type="button" class="btn-outline" onclick="toggleDrawer()">รายหมวด</button>
           <button type="button" class="btn-outline" onclick="demoFill()">ทดสอบ</button>
-          <button type="button" class="btn-primary" onclick="makeSummary()">สรุป</button>
+          <button type="button" class="btn-outline" onclick="makeSummary()">สรุป</button>
           <button type="button" class="btn-outline" onclick="copySummary()">คัดลอก</button>
-          <button type="button" class="btn-primary" onclick="printResult()">ปริ้น / PDF</button>
+          <button type="button" class="btn-primary" onclick="printAnalytical()">ปริ้นสรุปวิเคราะห์</button>
           <button type="button" class="btn-gray" onclick="clearAll()">ล้าง</button>
         </div>
       </div>
@@ -407,6 +464,7 @@
       </div>
     </div>
 
+    <section class="print-report" id="printReport"></section>
     <main id="app"></main>
   </div>
 
@@ -462,7 +520,7 @@
           ["M-P9", "การเปิดช่องทางรับฟังความคิดเห็น", "จัดทำช่องทางรับฟังเสียงสะท้อนและข้อเสนอแนะจากมวลชนอย่างเป็นรูปธรรม"]
         ]
       },
-            {
+                    {
         title: "หมวด 4: วัฒนธรรมทางการเมืองของขบวนการ",
         items: [
           ["M-C1", "ฉันทามติและความสมานฉันท์ภายใน", "มีเป้าหมายร่วมกันชัดเจนและจัดการความขัดแย้งภายในได้ไม่แตกแยก"],
@@ -658,7 +716,7 @@
       const mType = document.getElementById("mType").value || "-";
       const evaluator = document.getElementById("mEval").value || "-";
       const lines = [
-        `ขบวนการ: ${name}`,
+        `P.I.C.T. — ขบวนการ: ${name}`,
         `ช่วงเวลา: ${period} | โครงสร้าง: ${mType} | ผู้ประเมิน: ${evaluator}`
       ];
       let sum10 = 0;
@@ -695,8 +753,87 @@
       out.style.display = "block";
     }
 
-    function printResult() {
-      document.getElementById("drawer").classList.add("open");
+    function buildAnalyticalReport() {
+      const name = document.getElementById("mName").value || "(ไม่ระบุชื่อขบวนการ)";
+      const period = document.getElementById("mPeriod").value || "-";
+      const mType = document.getElementById("mType").value || "-";
+      const evaluator = document.getElementById("mEval").value || "-";
+
+      let sum10 = 0, done = 0, total = 0;
+      const catStats = DATA.map((cat, c) => {
+        let raw = 0, answered = 0;
+        const notes = [];
+        cat.items.forEach(([code], i) => {
+          total++;
+          const k = `${c}-${i}`;
+          const v = valMap[k];
+          const n = (noteMap[k] || "").trim();
+          if (v !== null) { raw += v; done++; answered++; }
+          if (n) { notes.push(`${code}: ${n}`); }
+        });
+        const s10 = (raw / cat.items.length) * 10;
+        sum10 += s10;
+        return {
+          title: cat.title,
+          count: cat.items.length,
+          answered,
+          raw,
+          s10,
+          theme: themeByScore(s10),
+          notes
+        };
+      });
+
+      const avg = sum10 / DATA.length;
+      const overallTheme = themeByScore(avg);
+
+      const sorted = [...catStats].sort((a, b) => b.s10 - a.s10);
+      const strongest = sorted[0];
+      const weakest = sorted[sorted.length - 1];
+
+      const rowsHtml = catStats.map((st) => `
+        <tr>
+          <td><strong>${st.title}</strong></td>
+          <td>${st.answered}/${st.count}</td>
+          <td><strong>${st.s10.toFixed(2)}</strong> / 10</td>
+          <td style="color:${st.theme.fg};font-weight:700;">${st.theme.label}</td>
+          <td>${st.notes.length ? st.notes.join("<br/>") : "-"}</td>
+        </tr>
+      `).join("");
+
+      document.getElementById("printReport").innerHTML = `
+        <div class="report-box">
+          <h3>1. ข้อมูลภาพรวมและการจำแนกผลประเมิน (P.I.C.T.)</h3>
+          <p style="margin:0 0 6px;"><strong>ขบวนการ:</strong> ${name} &nbsp;|&nbsp; <strong>ช่วงเวลา:</strong> ${period} &nbsp;|&nbsp; <strong>โครงสร้าง:</strong> ${mType} &nbsp;|&nbsp; <strong>ผู้ประเมิน:</strong> ${evaluator}</p>
+          <p style="margin:0;"><strong>คะแนนเฉลี่ยรวม:</strong> <span style="color:${overallTheme.fg};font-weight:800;font-size:1.1rem;">${avg.toFixed(2)} / 10</span> (<strong style="color:${overallTheme.fg};">${overallTheme.label}</strong>) &nbsp;|&nbsp; <strong>ความครบถ้วน:</strong> ${done}/${total} ข้อ</p>
+        </div>
+
+        <div class="report-box">
+          <h3>2. บทวิเคราะห์จุดแข็งและจุดที่ควรปรับปรุง</h3>
+          <p style="margin:0 0 6px;"><strong>หมวดที่คะแนนสูงสุด:</strong> ${strongest.title} (${strongest.s10.toFixed(2)}/10 — ${strongest.theme.label})</p>
+          <p style="margin:0;"><strong>หมวดที่ควรเร่งพัฒนา:</strong> ${weakest.title} (${weakest.s10.toFixed(2)}/10 — ${weakest.theme.label})</p>
+        </div>
+
+        <div class="report-box">
+          <h3>3. ตารางสรุปคะแนนรายหมวดและหมายเหตุประกอบ</h3>
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th>หมวดตัวชี้วัด</th>
+                <th>ตอบแล้ว</th>
+                <th>คะแนน</th>
+                <th>ระดับ</th>
+                <th>หมายเหตุ / หลักฐาน</th>
+              </tr>
+            </thead>
+            <tbody>${rowsHtml}</tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function printAnalytical() {
+      buildAnalyticalReport();
       window.print();
     }
 
@@ -704,4 +841,3 @@
   </script>
 </body>
 </html>
-    
