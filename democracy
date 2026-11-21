@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แบบประเมินความเป็นประชาธิปไตยของขบวนการเคลื่อนไหวทางการเมือง (60 ข้อ)</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --border: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Sarabun", "Noto Sans Thai", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      padding-bottom: 48px;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 14px;
+    }
+
+    header.hero {
+      background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+      color: #fff;
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 14px;
+    }
+
+    header.hero h1 { margin: 0 0 6px; font-size: clamp(1.15rem, 2.5vw, 1.55rem); }
+    header.hero p { margin: 0; font-size: clamp(0.85rem, 1.6vw, 0.98rem); opacity: 0.92; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      padding: 8px 11px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      background: #fff;
+    }
+
+    .top-bar {
+      position: sticky;
+      top: 8px;
+      z-index: 30;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(8px);
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .bar-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .score-inline {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .score-num {
+      font-size: clamp(1.35rem, 2.5vw, 1.7rem);
+      font-weight: 800;
+      color: #b91c1c;
+      transition: color 0.2s ease;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      transition: all 0.2s ease;
+    }
+
+    .bar-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    button:hover { filter: brightness(0.97); }
+    button:active { transform: scale(0.98); }
+
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-outline { background: var(--primary-soft); color: var(--primary); border: 1px solid #bfdbfe; }
+    .btn-gray { background: #e5e7eb; color: #1f2937; }
+
+    .drawer {
+      display: none;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #d1d5db;
+    }
+
+    .drawer.open { display: block; }
+
+    .cat-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .cat-box {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+    }
+
+    .cat-header {
+      background: #fef2f2;
+      border-left: 4px solid #b91c1c;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin: 20px 0 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      break-after: avoid;
+    }
+
+    .cat-header h2 { margin: 0; font-size: clamp(0.98rem, 1.8vw, 1.12rem); color: #1f2937; }
+    .cat-badge {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #b91c1c;
+      background: #fff;
+      padding: 3px 10px;
+      border-radius: 8px;
+      border: 1px solid #fecaca;
+    }
+
+    .q-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 15px;
+      margin-bottom: 9px;
+      break-inside: avoid;
+    }
+
+    .q-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    @media (min-width: 768px) {
+      .q-body {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .q-info { flex: 1 1 58%; }
+      .q-controls { flex: 0 0 320px; }
+    }
+
+    .q-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 0.96rem;
+      margin-bottom: 3px;
+    }
+
+    .q-code {
+      font-size: 0.75rem;
+      background: var(--primary-soft);
+      color: var(--primary);
+      padding: 2px 7px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .q-desc { font-size: 0.87rem; color: #374151; }
+
+    .opts { display: flex; gap: 6px; margin-bottom: 6px; }
+
+    .opt-btn {
+      flex: 1;
+      min-height: 38px;
+      padding: 7px 6px;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      color: #111827;
+      font-weight: 700;
+      font-size: 0.86rem;
+    }
+
+    .opt-btn.on[data-v="1"] { background: #059669; border-color: #059669; color: #fff; }
+    .opt-btn.on[data-v="0.5"] { background: #d97706; border-color: #d97706; color: #fff; }
+    .opt-btn.on[data-v="0"] { background: #dc2626; border-color: #dc2626; color: #fff; }
+
+    .note {
+      width: 100%;
+      padding: 6px 9px;
+      border: 1px solid #e5e7eb;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-family: inherit;
+      background: #f9fafb;
+    }
+
+    pre.out {
+      white-space: pre-wrap;
+      background: #0f172a;
+      color: #f1f5f9;
+      padding: 11px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      margin: 8px 0 0;
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm;
+      }
+
+      body {
+        background: #fff;
+        padding-bottom: 0;
+        color: #111827;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      header.hero {
+        background: #1e3a8a !important;
+        color: #fff !important;
+        padding: 14px 16px;
+        margin-bottom: 10px;
+      }
+
+      .top-bar {
+        position: static;
+        box-shadow: none;
+        border-radius: 10px;
+        margin-bottom: 12px;
+      }
+
+      .bar-btns,
+      .opt-btn:not(.on) {
+        display: none !important;
+      }
+
+      .drawer {
+        display: block !important;
+      }
+
+      .q-card {
+        padding: 9px 12px;
+        margin-bottom: 6px;
+        box-shadow: none;
+      }
+
+      .q-body {
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 12px !important;
+      }
+
+      .q-info { flex: 1 1 62% !important; }
+      .q-controls { flex: 0 0 230px !important; }
+
+      .opt-btn.on {
+        min-height: 28px;
+        padding: 4px 8px;
+        font-size: 0.8rem;
+      }
+
+      .note {
+        background: #fff;
+        border: 1px solid #d1d5db;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <h1>แบบประเมินความเป็นประชาธิปไตยของขบวนการเคลื่อนไหวทางการเมือง</h1>
+      <p>60 ตัวชี้วัด (5 หมวด) • สีเปลี่ยนอัตโนมัติตามผลประเมิน • รองรับการปริ้นและบันทึกเป็น PDF</p>
+    </header>
+
+    <section class="card">
+      <div class="meta-grid">
+        <div class="field">
+          <label for="mName">ชื่อขบวนการ</label>
+          <input id="mName" type="text" placeholder="ระบุชื่อขบวนการ" />
+        </div>
+        <div class="field">
+          <label for="mPeriod">ช่วงเวลาที่ประเมิน</label>
+          <input id="mPeriod" type="text" placeholder="เช่น ต.ค.–พ.ย. 2569" />
+        </div>
+        <div class="field">
+          <label for="mType">รูปแบบโครงสร้าง</label>
+          <select id="mType">
+            <option value="">-- เลือก --</option>
+            <option value="กระจายศูนย์">กระจายศูนย์</option>
+            <option value="รวมศูนย์">รวมศูนย์</option>
+            <option value="เครือข่ายหลวมๆ">เครือข่ายหลวมๆ</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="mEval">ผู้ประเมิน</label>
+          <input id="mEval" type="text" placeholder="ชื่อผู้ประเมิน" />
+        </div>
+      </div>
+    </section>
+
+    <div class="top-bar" id="topBar">
+      <div class="bar-row">
+        <div class="score-inline">
+          <span class="score-num" id="totScore">0.00</span>
+          <span>/ 10</span>
+          <span class="badge" id="totBadge">อำนาจนิยม</span>
+          <span id="progTxt" style="font-size:0.82rem;color:#6b7280;">0/60</span>
+        </div>
+        <div class="bar-btns">
+          <button type="button" class="btn-outline" onclick="toggleDrawer()">รายหมวด</button>
+          <button type="button" class="btn-outline" onclick="demoFill()">ทดสอบ</button>
+          <button type="button" class="btn-primary" onclick="makeSummary()">สรุป</button>
+          <button type="button" class="btn-outline" onclick="copySummary()">คัดลอก</button>
+          <button type="button" class="btn-primary" onclick="printResult()">ปริ้น / PDF</button>
+          <button type="button" class="btn-gray" onclick="clearAll()">ล้าง</button>
+        </div>
+      </div>
+      <div class="drawer" id="drawer">
+        <div class="cat-list" id="catList"></div>
+        <pre class="out" id="outBox" style="display:none;"></pre>
+      </div>
+    </div>
+
+    <main id="app"></main>
+  </div>
+
+  <script>
+    const DATA = [
+      {
+        title: "หมวด 1: การคัดเลือกตัวแทนและพหุนิยมภายใน",
+        items: [
+          ["M-E1", "การคัดเลือกแกนนำ/ผู้แทนหลัก", "มาจากการเลือกตั้งหรือฉันทามติที่เปิดกว้าง ไม่ใช่แต่งตั้งกันเอง"],
+          ["M-E2", "ความยุติธรรมในการลงมติ/เลือกตั้ง", "กระบวนการลงคะแนนโปร่งใส ปราศจากการปั่นเสียงหรือแทรกแซง"],
+          ["M-E3", "การคัดเลือกผู้แทนเครือข่าย/กลุ่มย่อย", "กลุ่มย่อย ภูมิภาค หรือแนวร่วม มีอิสระเลือกผู้แทนของตนเอง"],
+          ["M-E4", "สิทธิในการออกเสียงถ้วนหน้า", "สมาชิกตามเกณฑ์มีสิทธิออกเสียงเท่าเทียม (1 คน 1 เสียง)"],
+          ["M-E5", "ความปลอดภัยในการแสดงจุดยืน/ลงมติ", "โหวตหรือแสดงจุดยืนได้โดยไม่ถูกข่มขู่ คุกคาม หรือล่าแม่มด"],
+          ["M-E6", "ความเท่าเทียมในการนำเสนอแนวทาง", "กลุ่มความคิดต่างเสนอญัตติหรือแนวทางต่อสู้ได้อย่างเท่าเทียม"],
+          ["M-E7", "ความโปร่งใสทางการเงินและเงินบริจาค", "เปิดเผยรายรับ เงินบริจาค และการใช้จ่ายให้ตรวจสอบได้"],
+          ["M-E8", "กลไกการผลัดเปลี่ยนแกนนำ", "มีกติกาชัดเจนในการเปลี่ยนผ่านตำแหน่งเมื่อครบวาระหรือมีเหตุจำเป็น"],
+          ["M-E9", "เสรีภาพในการตั้งกลุ่มย่อย/ปีกความคิด", "รวมกลุ่มย่อยหรือตั้งคณะทำงานเฉพาะประเด็นได้โดยไม่ถูกขัดขวาง"],
+          ["M-E10", "พื้นที่ของเสียงข้างน้อย/แนวคิดทางเลือก", "แนวคิดต่างมีโอกาสโน้มน้าวมวลชนและก้าวเป็นแนวทางหลักได้"],
+          ["M-E11", "โอกาสในการเข้าสู่ตำแหน่งบริหาร", "ตำแหน่งสำคัญเปิดกว้าง ไม่ผูกขาดเฉพาะคนใกล้ชิดหรือผู้ก่อตั้ง"],
+          ["M-E12", "การเชื่อมโยงกับภาคประชาสังคมอื่น", "เปิดรับการร่วมงานกับองค์กรภายนอกโดยไม่พยายามครอบงำ"]
+        ]
+      },
+      {
+        title: "หมวด 2: การบริหารจัดการและการตัดสินใจของแกนนำ",
+        items: [
+          ["M-G1", "อำนาจตัดสินใจของผู้แทนที่ได้รับเลือก", "ผู้แทนที่เลือกมาเป็นผู้กำหนดทิศทางจริง ไม่ใช่หุ่นเชิด"],
+          ["M-G2", "อำนาจสูงสุดของที่ประชุมใหญ่/มวลชน", "มติของที่ประชุมใหญ่หรือเสียงส่วนใหญ่มีอำนาจเหนือการตัดสินใจโดยพลการ"],
+          ["M-G3", "ระบบตรวจสอบและถ่วงดุลภายใน", "มีคณะกรรมการตรวจสอบ หรือกลไกถอดถอนแกนนำที่ทำงานได้จริง"],
+          ["M-G4", "ความเป็นอิสระจากกลุ่มฮาร์ดคอร์/การ์ด", "การตัดสินใจอยู่เหนืออิทธิพลหรือการกดดันจากกลุ่มใช้กำลัง/การ์ด"],
+          ["M-G5", "ความเป็นอิสระจากผู้บงการภายนอก", "ยุทธศาสตร์ไม่ถูกกำหนดโดยพรรค นายทุน หรือกลุ่มอำนาจภายนอก"],
+          ["M-G6", "อิทธิพลของกลุ่มทุนหรือผู้บริจาครายใหญ่", "ผู้บริจาครายใหญ่ไม่สามารถซื้ออำนาจการตัดสินใจเหนือมติมวลชน"],
+          ["M-G7", "ความรับผิดรับชอบของแกนนำ", "ชี้แจงเหตุผลและรับผิดชอบต่อความผิดพลาดทางยุทธศาสตร์ต่อสมาชิก"],
+          ["M-G8", "เอกภาพในการประสานงานเครือข่าย", "ประสานงานและขับเคลื่อนกิจกรรมร่วมกันระหว่างเครือข่ายได้อย่างเป็นระบบ"],
+          ["M-G9", "ความโปร่งใสและการเข้าถึงข้อมูลภายใน", "ข้อมูลการประชุม ข้อตกลง และการเจรจาสำคัญถูกเปิดเผยให้สมาชิกทราบ"],
+          ["M-G10", "ความซื่อสัตย์และการปลอดทุจริต", "ไม่ยักยอกเงินบริจาค ไม่ใช้ทรัพยากรส่วนรวมเพื่อประโยชน์ส่วนตัว"],
+          ["M-G11", "ประสิทธิภาพของฝ่ายปฏิบัติการ/จัดตั้ง", "ทีมงานเบื้องหลังทำงานเป็นระบบและแปลงมติไปสู่การปฏิบัติได้จริง"],
+          ["M-G12", "อิสระในการตัดสินใจของสมาชิก/ผู้ชุมนุม", "เข้าร่วมกิจกรรมด้วยความสมัครใจ ไม่ถูกบังคับหรือเกณฑ์มา"],
+          ["M-G13", "ความเชื่อมั่นของสมาชิกต่อแกนนำ", "สมาชิกส่วนใหญ่ไว้วางใจในความจริงใจและความสามารถของแกนนำ"],
+          ["M-G14", "ความเชื่อมั่นต่อโครงสร้างขบวนการ", "เชื่อมั่นในระบบและกติกาของขบวนการมากกว่าการพึ่งพาตัวบุคคล"]
+        ]
+      },
+      {
+        title: "หมวด 3: การมีส่วนร่วมและการระดมมวลชน",
+        items: [
+          ["M-P1", "อัตราการมีส่วนร่วมในการตัดสินใจ", "สัดส่วนสมาชิกที่ร่วมลงมติหรือประชาพิจารณ์อยู่ในระดับสูงและสมัครใจ"],
+          ["M-P2", "พื้นที่ของกลุ่มเปราะบางและชายขอบ", "กลุ่มชาติพันธุ์ LGBTQ+ แรงงาน หรือคนชายขอบมีพื้นที่นำเสนอประเด็น"],
+          ["M-P3", "สัดส่วนผู้หญิงและคนรุ่นใหม่ในระดับนำ", "มีผู้หญิงหรือคนรุ่นใหม่ในตำแหน่งแกนนำ/ผู้ปราศรัยหลักในสัดส่วนสำคัญ"],
+          ["M-P4", "ความเข้มแข็งของฐานสมาชิก/อาสาสมัคร", "มีอาสาสมัครและสมาชิกที่ขับเคลื่อนงานต่อเนื่อง ไม่ใช่แค่ผู้ติดตามออนไลน์"],
+          ["M-P5", "ความตื่นตัวในการร่วมกิจกรรม", "สมาชิกมีส่วนร่วมระดมสมอง เสนอไอเดีย และจัดกิจกรรมย่อยเอง"],
+          ["M-P6", "วินัยและความพร้อมในการเคลื่อนไหวสงบ", "ยึดมั่นในแนวทางสันติวิธีและมีวินัยในการเข้าร่วมชุมนุมหรือแคมเปญ"],
+          ["M-P7", "การสร้างความรู้ความเข้าใจทางการเมือง", "ให้ความรู้ ข้อเท็จจริง และวิเคราะห์เชิงนโยบายแก่สมาชิกสม่ำเสมอ"],
+          ["M-P8", "ความตื่นตัวในการติดตามข้อมูลข่าวสาร", "ติดตามสถานการณ์ แลกเปลี่ยนข้อมูล และถกเถียงอย่างมีวิจารณญาณ"],
+          ["M-P9", "การเปิดช่องทางรับฟังความคิดเห็น", "จัดทำช่องทางรับฟังเสียงสะท้อนและข้อเสนอแนะจากมวลชนอย่างเป็นรูปธรรม"]
+        ]
+      },
+            {
+        title: "หมวด 4: วัฒนธรรมทางการเมืองของขบวนการ",
+        items: [
+          ["M-C1", "ฉันทามติและความสมานฉันท์ภายใน", "มีเป้าหมายร่วมกันชัดเจนและจัดการความขัดแย้งภายในได้ไม่แตกแยก"],
+          ["M-C2", "การต่อต้านลัทธิบูชาตัวบุคคล", "ไม่ยึดติดกับผู้นำเด็ดขาดที่สั่งการข้ามกติกา (ยึดติดน้อย คะแนนสูง)"],
+          ["M-C3", "การปฏิเสธการใช้ความรุนแรง/อำนาจนอกระบบ", "ไม่สนับสนุนการใช้กำลังบังคับหรืออำนาจนอกระบบ (สนับสนุนน้อย คะแนนสูง)"],
+          ["M-C4", "การไม่ผูกขาดความถูกต้องโดยกลุ่มแกนนำ", "ไม่มองว่าแกนนำหรือผู้เชี่ยวชาญรู้ดีที่สุดจนไม่ต้องฟังมวลชน"],
+          ["M-C5", "ความเชื่อมั่นในกระบวนการถกเถียงประชาธิปไตย", "เชื่อว่าการถกเถียงและลงมติสร้างความเข้มแข็ง ไม่ใช่เรื่องเสียเวลา"],
+          ["M-C6", "การเชื่อมโยงประชาธิปไตยกับคุณภาพชีวิต", "เชื่อมั่นและสื่อสารว่าประชาธิปไตยแก้ปัญหาปากท้องและความเหลื่อมล้ำได้"],
+          ["M-C7", "ความยึดมั่นในคุณค่าประชาธิปไตย", "ยึดมั่นเป็นเป้าหมายระยะยาว ไม่ใช่แค่เครื่องมือชั่วคราวเพื่อเอาชนะ"],
+          ["M-C8", "ความเป็นพหุนิยมทางความเชื่อ", "แยกเรื่องความเชื่อทางศาสนาหรือลัทธิออกจากกติกาส่วนรวม"]
+        ]
+      },
+      {
+        title: "หมวด 5: สิทธิเสรีภาพและการคุ้มครองภายในขบวนการ",
+        items: [
+          ["M-L1", "ความเป็นอิสระของสื่อและเพจเครือข่าย", "ช่องทางสื่อสารหลักเปิดกว้าง ไม่ถูกผูกขาดอวยแกนนำเพียงกลุ่มเดียว"],
+          ["M-L2", "เสรีภาพของสื่ออิสระและนักเขียน", "นักเขียน ศิลปิน และสื่ออิสระนำเสนอผลงานได้โดยไม่ถูกเซ็นเซอร์"],
+          ["M-L3", "เสรีภาพในการวิพากษ์วิจารณ์ขบวนการ", "วิจารณ์แกนนำและยุทธศาสตร์ได้โดยไม่ถูกขับไล่หรือประณาม"],
+          ["M-L4", "ความหลากหลายของเนื้อหาและข้อถกเถียง", "พื้นที่สื่อสารเปิดรับมุมมองที่หลากหลายและสร้างสรรค์"],
+          ["M-L5", "การเปิดกว้างทางดิจิทัลและไม่ปิดกั้น", "ไม่บล็อก ปิดกั้น หรือใช้ปฏิบัติการทางไซเบอร์ปิดปากผู้เห็นต่าง"],
+          ["M-L6", "สิทธิในการรวมกลุ่มและเครือข่ายคู่ขนาน", "มีอิสระเข้าร่วมกลุ่มกิจกรรมหรือสหภาพอื่นควบคู่ไปกับการร่วมขบวนการ"],
+          ["M-L7", "ช่องทางร้องเรียนและไกล่เกลี่ยข้อพิพาท", "มีกลไกรับเรื่องร้องเรียนเมื่อถูกละเมิดสิทธิ คุกคามทางเพศ หรือไม่เป็นธรรม"],
+          ["M-L8", "การต่อต้านความรุนแรงและการประจาน", "ไม่ใช้ความรุนแรง กักขัง หรือทำลายศักดิ์ศรีความเป็นมนุษย์ (Doxxing)"],
+          ["M-L9", "ความเป็นกลางของคณะกรรมการสอบสวน", "หากเกิดกรณีพิพาท คณะกรรมการตัดสินมีความเป็นอิสระ ไม่เข้าข้างพวกพ้อง"],
+          ["M-L10", "เสรีภาพทางความเชื่อและอัตลักษณ์", "เคารพความแตกต่างทางศาสนา อัตลักษณ์ทางเพศ และวิถีชีวิตของผู้เข้าร่วม"],
+          ["M-L11", "ความเสมอภาคภายใต้กติกาของขบวนการ", "กติกาและมาตรฐานจริยธรรมใช้กับแกนนำและสมาชิกเท่าเทียม (ไม่มีสองมาตรฐาน)"],
+          ["M-L12", "การดูแลความปลอดภัยของผู้เข้าร่วม", "มีมาตรการดูแลความปลอดภัยทั้งทางกายภาพและดิจิทัลอย่างรับผิดชอบ"],
+          ["M-L13", "การเคารพสิทธิและทรัพย์สินสาธารณะ/เอกชน", "เคารพสิทธิขั้นพื้นฐานและทรัพย์สินของประชาชนทั่วไปที่ไม่เกี่ยวข้อง"],
+          ["M-L14", "การเคารพความเป็นส่วนตัว", "ไม่เปิดเผยข้อมูลส่วนบุคคลของสมาชิกหรือผู้เห็นต่างโดยมิชอบ"],
+          ["M-L15", "การตระหนักและคุ้มครองสิทธิมนุษยชน", "ยึดถือหลักสิทธิมนุษยชนสากลในการเคลื่อนไหวอย่างจริงจัง"],
+          ["M-L16", "การไม่เลือกปฏิบัติ", "ไม่กีดกันหรือเหยียดหยามตามชนชั้น การศึกษา ภูมิภาค เพศ หรือชาติพันธุ์"],
+          ["M-L17", "การไม่อ้างความเร่งด่วนเพื่อตัดสิทธิสมาชิก", "ไม่อ้างสถานการณ์ฉุกเฉินหรือศัตรูร่วมเพื่อรวบอำนาจและปิดปากสมาชิก"]
+        ]
+      }
+    ];
+
+    const valMap = {};
+    const noteMap = {};
+
+    function init() {
+      const app = document.getElementById("app");
+      const catList = document.getElementById("catList");
+      app.innerHTML = "";
+      catList.innerHTML = "";
+
+      DATA.forEach((cat, c) => {
+        const box = document.createElement("div");
+        box.className = "cat-box";
+        box.id = `c-box-${c}`;
+        box.innerHTML = `<div>${cat.title}</div><strong id="c-pill-${c}">0.00 / 10</strong>`;
+        catList.appendChild(box);
+
+        const h = document.createElement("div");
+        h.className = "cat-header";
+        h.id = `c-hdr-${c}`;
+        h.innerHTML = `<h2>${cat.title} (${cat.items.length} ข้อ)</h2><span class="cat-badge" id="c-head-${c}">0.00 / 10</span>`;
+        app.appendChild(h);
+
+        cat.items.forEach(([code, name, desc], i) => {
+          const k = `${c}-${i}`;
+          valMap[k] = null;
+          noteMap[k] = "";
+
+          const card = document.createElement("div");
+          card.className = "q-card";
+          card.innerHTML = `
+            <div class="q-body">
+              <div class="q-info">
+                <div class="q-top"><span>${i + 1}. ${name}</span><span class="q-code">${code}</span></div>
+                <div class="q-desc">${desc}</div>
+              </div>
+              <div class="q-controls">
+                <div class="opts">
+                  <button type="button" class="opt-btn" data-k="${k}" data-v="1" onclick="pick('${k}',1,this)">1</button>
+                  <button type="button" class="opt-btn" data-k="${k}" data-v="0.5" onclick="pick('${k}',0.5,this)">0.5</button>
+                  <button type="button" class="opt-btn" data-k="${k}" data-v="0" onclick="pick('${k}',0,this)">0</button>
+                </div>
+                <input type="text" class="note" placeholder="หมายเหตุ / หลักฐาน..." oninput="noteMap['${k}']=this.value" />
+              </div>
+            </div>
+          `;
+          app.appendChild(card);
+        });
+      });
+      calc();
+    }
+
+    function pick(k, v, btn) {
+      if (valMap[k] === v) {
+        valMap[k] = null;
+        btn.classList.remove("on");
+      } else {
+        valMap[k] = v;
+        btn.parentElement.querySelectorAll(".opt-btn").forEach((b) => b.classList.remove("on"));
+        btn.classList.add("on");
+      }
+      calc();
+    }
+
+    function themeByScore(s) {
+      if (s > 8.0) {
+        return { label: "ประชาธิปไตยเต็มรูปแบบ", fg: "#047857", bg: "#ecfdf5", border: "#6ee7b7" };
+      }
+      if (s > 6.0) {
+        return { label: "ประชาธิปไตยมีข้อบกพร่อง", fg: "#15803d", bg: "#f0fdf4", border: "#86efac" };
+      }
+      if (s > 4.0) {
+        return { label: "ลูกผสม (Hybrid)", fg: "#b45309", bg: "#fffbeb", border: "#fcd34d" };
+      }
+      return { label: "อำนาจนิยม", fg: "#b91c1c", bg: "#fef2f2", border: "#fca5a5" };
+    }
+
+    function calc() {
+      let sum10 = 0, done = 0, total = 0;
+      DATA.forEach((cat, c) => {
+        let raw = 0;
+        cat.items.forEach((_, i) => {
+          total++;
+          const v = valMap[`${c}-${i}`];
+          if (v !== null) { raw += v; done++; }
+        });
+        const s10 = (raw / cat.items.length) * 10;
+        sum10 += s10;
+
+        const cTheme = themeByScore(s10);
+        const headEl = document.getElementById(`c-head-${c}`);
+        const hdrBox = document.getElementById(`c-hdr-${c}`);
+        const pillBox = document.getElementById(`c-box-${c}`);
+        const pillVal = document.getElementById(`c-pill-${c}`);
+
+        headEl.textContent = `${s10.toFixed(2)} / 10 (${raw}/${cat.items.length})`;
+        headEl.style.color = cTheme.fg;
+        headEl.style.borderColor = cTheme.border;
+
+        hdrBox.style.background = cTheme.bg;
+        hdrBox.style.borderLeftColor = cTheme.fg;
+
+        pillBox.style.background = cTheme.bg;
+        pillBox.style.borderColor = cTheme.border;
+        pillVal.textContent = `${s10.toFixed(2)} / 10`;
+        pillVal.style.color = cTheme.fg;
+      });
+
+      const avg = sum10 / DATA.length;
+      const tTheme = themeByScore(avg);
+
+      const totNum = document.getElementById("totScore");
+      const badge = document.getElementById("totBadge");
+      const topBar = document.getElementById("topBar");
+
+      totNum.textContent = avg.toFixed(2);
+      totNum.style.color = tTheme.fg;
+      document.getElementById("progTxt").textContent = `${done}/${total}`;
+
+      badge.textContent = tTheme.label;
+      badge.style.background = tTheme.bg;
+      badge.style.color = tTheme.fg;
+      badge.style.borderColor = tTheme.border;
+
+      topBar.style.borderColor = tTheme.border;
+    }
+
+    function toggleDrawer() {
+      document.getElementById("drawer").classList.toggle("open");
+    }
+
+    function demoFill() {
+      const sample = [1, 0.5, 0];
+      DATA.forEach((cat, c) => {
+        cat.items.forEach((_, i) => {
+          const k = `${c}-${i}`;
+          const v = sample[(c + i) % 3];
+          valMap[k] = v;
+          document.querySelectorAll(`.opt-btn[data-k="${k}"]`).forEach((b) => {
+            b.classList.toggle("on", Number(b.dataset.v) === v);
+          });
+        });
+      });
+      calc();
+    }
+
+    function clearAll() {
+      Object.keys(valMap).forEach((k) => (valMap[k] = null));
+      Object.keys(noteMap).forEach((k) => (noteMap[k] = ""));
+      document.querySelectorAll(".opt-btn").forEach((b) => b.classList.remove("on"));
+      document.querySelectorAll(".note").forEach((n) => (n.value = ""));
+      calc();
+    }
+
+    function buildSummaryText() {
+      const name = document.getElementById("mName").value || "(ไม่ระบุ)";
+      const period = document.getElementById("mPeriod").value || "-";
+      const mType = document.getElementById("mType").value || "-";
+      const evaluator = document.getElementById("mEval").value || "-";
+      const lines = [
+        `ขบวนการ: ${name}`,
+        `ช่วงเวลา: ${period} | โครงสร้าง: ${mType} | ผู้ประเมิน: ${evaluator}`
+      ];
+      let sum10 = 0;
+      DATA.forEach((cat, c) => {
+        let raw = 0;
+        cat.items.forEach((_, i) => (raw += valMap[`${c}-${i}`] || 0));
+        const s10 = (raw / cat.items.length) * 10;
+        sum10 += s10;
+        lines.push(`${cat.title}: ${s10.toFixed(2)}/10`);
+      });
+      const avg = sum10 / DATA.length;
+      lines.push(`รวม: ${avg.toFixed(2)}/10 (${themeByScore(avg).label})`);
+      return lines.join("\n");
+    }
+
+    function makeSummary() {
+      const d = document.getElementById("drawer");
+      const out = document.getElementById("outBox");
+      d.classList.add("open");
+      if (out.style.display === "block") { out.style.display = "none"; return; }
+      out.textContent = buildSummaryText();
+      out.style.display = "block";
+    }
+
+    function copySummary() {
+      const txt = buildSummaryText();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).catch(() => {});
+      }
+      const d = document.getElementById("drawer");
+      const out = document.getElementById("outBox");
+      d.classList.add("open");
+      out.textContent = txt;
+      out.style.display = "block";
+    }
+
+    function printResult() {
+      document.getElementById("drawer").classList.add("open");
+      window.print();
+    }
+
+    init();
+  </script>
+</body>
+</html>
+    
